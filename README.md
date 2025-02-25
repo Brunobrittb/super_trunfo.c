@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+
+
 // Estrutura para armazenar os dados de cada cidade
 struct Carta {
     char estado[20];  // Nome do estado (A a H)
