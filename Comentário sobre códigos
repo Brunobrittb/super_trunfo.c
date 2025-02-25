@@ -1,0 +1,64 @@
+#include <stdio.h>  // Inclui a biblioteca padrão de entrada e saída (necessária para funções como printf e scanf)
+
+// Estrutura para armazenar os dados de cada cidade
+struct Carta {
+    char estado[20];               // Nome do estado (A a H) - campo do tipo string (array de char)
+    int cidade;                    // Número da cidade (1 a 4) - campo do tipo inteiro
+    int populacao;                 // População da cidade - campo do tipo inteiro
+    float area;                    // Área da cidade em km² - campo do tipo ponto flutuante
+    float pib;                     // PIB da cidade em bilhões - campo do tipo ponto flutuante
+    int pontos_turisticos;         // Número de pontos turísticos na cidade - campo do tipo inteiro
+};
+
+// Função para cadastrar os dados das cidades de um estado
+void cadastrarCidades(struct Carta *carta, const char *estado) {
+    for (int i = 0; i < 4; i++) {  // Laço que percorre as 4 cidades (1 a 4)
+        carta[i].cidade = i + 1;  // Atribui o número da cidade (1 a 4)
+        snprintf(carta[i].estado, sizeof(carta[i].estado), "%s", estado);  // Atribui o nome do estado à estrutura
+
+        // Solicita os dados para cada cidade e os armazena
+        printf("\nCidade %d do %s:\n", carta[i].cidade, estado);  // Exibe a cidade e o estado
+        printf("Informe a população: ");
+        scanf("%d", &carta[i].populacao);  // Lê a população da cidade
+        
+        printf("Informe a área: ");
+        scanf("%f", &carta[i].area);  // Lê a área da cidade
+        
+        printf("Informe o PIB: ");
+        scanf("%f", &carta[i].pib);  // Lê o PIB da cidade
+        
+        printf("Informe o número de pontos turísticos: ");
+        scanf("%d", &carta[i].pontos_turisticos);  // Lê o número de pontos turísticos da cidade
+    }
+}
+
+// Função para exibir os dados das cidades
+void exibirCidades(struct Carta *carta) {
+    for (int i = 0; i < 4; i++) {  // Laço que percorre as 4 cidades (1 a 4)
+        printf("\nCidade %d do %s:\n", carta[i].cidade, carta[i].estado);  // Exibe a cidade e o estado
+        printf("População: %d\n", carta[i].populacao);  // Exibe a população da cidade
+        printf("Área: %.2f km²\n", carta[i].area);  // Exibe a área da cidade
+        printf("PIB: %.2f bilhões\n", carta[i].pib);  // Exibe o PIB da cidade
+        printf("Pontos turísticos: %d\n", carta[i].pontos_turisticos);  // Exibe o número de pontos turísticos da cidade
+    }
+}
+
+int main() {
+    // Declara dois arrays de estruturas Carta, um para o Estado A e outro para o Estado B
+    struct Carta carta1[4], carta2[4];
+
+    // Cadastro de cidades do Estado A
+    printf("Cadastro das Cidades do Estado A:\n");
+    cadastrarCidades(carta1, "Estado A");  // Chama a função para cadastrar as cidades do Estado A
+
+    // Cadastro de cidades do Estado B
+    printf("\nCadastro das Cidades do Estado B:\n");
+    cadastrarCidades(carta2, "Estado B");  // Chama a função para cadastrar as cidades do Estado B
+
+    // Exibição dos dados cadastrados
+    printf("\nDados Cadastrados:\n");
+    exibirCidades(carta1);  // Chama a função para exibir as cidades do Estado A
+    exibirCidades(carta2);  // Chama a função para exibir as cidades do Estado B
+
+    return 0;  // Indica que o programa terminou com sucesso
+}
